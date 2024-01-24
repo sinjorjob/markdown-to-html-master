@@ -1,1 +1,249 @@
-test
+body {
+    background-color: #A100FF;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+}
+
+#editor,
+#preview {
+    width: 70%;
+    height: 1000px;
+    /* ここを修正。適切な高さに設定してください。 */
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    overflow-y: auto;
+    /* ここを修正。 */
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    margin: 10px;
+}
+
+#preview {
+    overflow-y: auto;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* テーブルのスタイルを追加 */
+table {
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+/* 保存ボタンのスタイルを追加 */
+#saveButton,
+#saveMarkdownButton {
+    display: block;
+    width: 200px;
+    height: 50px;
+    margin: 20px auto;
+    background-color: #FFD700;
+    /* ボタンの背景色を金色に変更 */
+    text-align: center;
+    border-radius: 10px;
+    color: #423d3d;
+    /* ボタンの文字色を白に変更 */
+    font-weight: bold;
+    line-height: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: white;
+    /* 枠線をなくす */
+    /* ホバー時のアニメーションを追加 */
+}
+
+#saveButton:hover {
+    background-color: #42e3ff;
+    /* ホバー時のボタンの背景色を濃い金色に変更 */
+}
+
+
+#pdatePreviewButton {
+    background-color: #42e3ff;
+    /* ホバー時のボタンの背景色を濃い金色に変更 */
+}
+#saveMarkdownButton:hover {
+    background-color: #42e3ff;
+    /* ホバー時のボタンの背景色を濃い金色に変更 */
+}
+
+#uploadImageButton,
+#insertMermaidButton {
+    display: block;
+    width: 200px;
+    height: 50px;
+    margin: 20px auto;
+    background-color: #FFD700;
+    /* ボタンの背景色を金色に変更 */
+    text-align: center;
+    border-radius: 10px;
+    color: #423d3d;
+    /* ボタンの文字色を白に変更 */
+    font-weight: bold;
+    line-height: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: white;
+    /* 枠線をなくす */
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    /* 文字の大きさを調整 */
+    /* ホバー時のアニメーションを追加 */
+}
+
+#updatePreviewButton{
+    display: block;
+    width: 200px;
+    height: 50px;
+    margin: 20px auto;
+    background-color: #FFD700;
+    /* ボタンの背景色を金色に変更 */
+    text-align: center;
+    border-radius: 10px;
+    color: #423d3d;
+    /* ボタンの文字色を白に変更 */
+    font-weight: bold;
+    line-height: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: white;
+    /* 枠線をなくす */
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    /* 文字の大きさを調整 */
+    /* ホバー時のアニメーションを追加 */
+}
+#uploadImageButton:hover {
+    background-color: #42e3ff;
+}
+
+#insertMermaidButton:hover {
+    background-color: #42e3ff;
+}
+#updatePreviewButton:hover {
+    background-color: #42e3ff;
+}
+/* アラートのデザインを修正 */
+.admonition {
+    border: 1px solid #fa1882;
+    /* 枠線を赤色に */
+    border-left-width: 5px;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #ffffcc;
+    /* 背景色を薄い黄色に */
+}
+
+.admonition-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #fa1882;
+    /* タイトルの文字色を赤色に */
+}
+
+.admonition.attention {
+    border-left-color: #fa1882;
+    /* 左側の枠線を赤色に */
+}
+
+/* インフォメーションのデザインを追加 */
+.admonition.info {
+    border: 1px solid #3052eb;
+    /* 枠線を青色に */
+    border-left-width: 5px;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #ccffff;
+    /* 背景色を薄い青色に */
+}
+
+.admonition.info .admonition-title {
+    color: #3052eb;
+    /* タイトルの文字色を青色に */
+}
+
+#buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+code {
+    background-color: #4b4b4b;
+    color: #f0f0f0;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 1.0em;  /* フォントサイズを小さく */
+}
+
+.mermaid {
+    margin: 40px 0;
+    /* 上下に30pxの余白を追加 */
+}
+
+.copy-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 10px;
+    background-color: #4b4b4b;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 0 0 0 5px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.copy-button:hover {
+    opacity: 1;
+}
+
+#description {
+    background-color: #fafafa;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #333;
+}
+#description ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+#description pre {
+    background-color: #404040;
+    padding: 10px;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+
+.toggleButton {
+    cursor: pointer;
+}
+
+#caution {
+    background-color: #ffcccc;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+}
