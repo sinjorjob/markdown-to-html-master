@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Markdown to HTML Master</title>
+    <script src="./js/marked.min.js"></script>
+    <link rel="stylesheet" href="./css/default.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/night-owl.min.css">
+    <script src="./js/highlight.min.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <h1 style="text-align: center;">🖊️ Markdown to HTML Master 🖊️</h1>
+
+    <div id="description">
+        <h2 class="toggleButton">📝 機能説明(クリックして説明を表示)</h2>
+        <div id="descriptionContent" style="display: none;">
+        <ul>
+            <div id="caution">
+                <h3>🚨 注意事項</h3>
+                <p>画面左側に入力した文章は<b>自動的にPC内のローカルストレージに保存される</b>ため、<b>次回エディタを開いた際は前回の状態が自動ロード</b>されます。<br>
+                ただし、<b>別のPCへ転送したり種類が異なるブラウザで開いた場合はデータを引き継ぐことができません。</b><br>
+                ⚠️[<b>Save as Markdown</b>]ボタンでテキストとして保存しておくことをお勧めします。</p>
+            </div><br>
+            <li>📄 <strong>プレビュー機能</strong><br>画面左側にマークダウン形式で文章を記載すると、画面右側にプレビュー表示します。<br>[<b>Update Preview</b>]ボタンを押すとプレビューが更新されます。</li><br>
+            <li>📚 <strong>目次の自動挿入機能</strong><br>「<b>#目次</b>」と記載することで<b>見出し(#タグ)</b>を自動的に判別して冒頭に目次を生成します。</li><br>
+            <li>🔔 <strong>info機能</strong><br>「<b>#info</b>」と記載することで特筆したいインフォーメーションを視覚的に見やすいボックスで表示します。<br>例えば、以下のように記述します：
+                <pre>#info
+セマンティック検索では大量の文章中のどの部分から一致したと判断したかをキャプションとして表示する機能がある。</pre>
+以下のように表示されます。<br>
+<img alt="./images/pre/info.png" src="./images/pre/info.png" style="max-width: 800px;"/>
+            </li><br>
+            <li>⚠️ <strong>alert機能</strong><br>「<b>#alert</b>」と記載することで注意事項を視覚的に見やすいボックスで表示します。<br>例えば、以下のように記述します：
+                <pre>#alert
+セマンティック検索を利用するにはAzure AI Searchの価格レベルを「Basic」以上にする必要がある。</pre>
+以下のように表示されます。<br>
+<img alt="./images/pre/alert.png" src="./images/pre/alert.png" style="max-width: 800px;"/>
+            </li><br>
+            <li>📊 <strong>Mermaid作図機能</strong><br>図を描画したい場合はMermaid表記を使って、Mermaidコードから図を自動生成します。（[<b>Insert Mermaid</b>]ボタンから追加）<br>例えば、以下のように記述します：
+                <pre>
+```mermaid
+pie title 日本の年収別人口分布
+    "200万円以下" : 20
+    "200万円～400万円" : 30
+    "400万円～600万円" : 25
+    "600万円～800万円" : 15
+    "800万円以上" : 10
+```           </pre>
+以下のように表示されます。<br>
+<img alt="./images/pre/pie_chart.png" src="./images/pre/pie_chart.png" style="max-width: 800px;"/>
+        </li><br>
+        <li>🐍 <strong>コードブロック追加機能</strong><br>プログラムコード等をコードブロックとして表示します。<br>例えば、以下のように記述します：
+            <pre>
+```python
+#根拠となる文書の表示
+captions = result['@search.captions']
+    if captions:
+    caption = captions[0]
+    print(f"Caption: {caption.text}\n")
+```</pre>
+以下のように表示されます。<br>
+右上の[<b>Copy</b>]ボタンを押すとコード全体をクリップボードにコピーできます。<br>
+<img alt="./images/pre/code.png" src="./images/pre/code.png" style="max-width: 800px;"/>
+    </li><br>
+        <li>🖼️ <strong>画像追加機能</strong><br>※画像は予めimagesフォルダに画像ファイルを入れて置き、[Insert Image]ボタンから画像ファイルを選択することで追加可能です。</li><br>
+        <li>💾 <strong>マークダウン情報の保存機能</strong><br>[<b>Save as Markdown</b>]ボタンを押すとテキストファイルとしてダウンロード可能です。</li><br>
+        <li>📤 <strong>htmlファイル出力機能</strong><br>[<b>Save as HTML</b>]ボタンを押すとプレビュー内容をhtmlファイルとして出力します。</li><br>
+    </ul>
+
+</div>
+</div>
+
+    <div class="container">
+       <!--<textarea id="editor" oninput="updatePreview()" placeholder="ここにMarkdown表記のコードをコピー＆ペーストする"></textarea>-->
+        <textarea id="editor"  placeholder="ここにMarkdown表記のコードをコピー＆ペーストする"></textarea>
+        <div id="preview"></div>
+    </div>
+
+    <div id="buttons">
+        <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+        <!-- 新たに「プレビューを更新」ボタンを追加 -->
+        <button id="updatePreviewButton">Update Preview</button>
+        <button id="uploadImageButton">Insert Image</button>
+        <button id="insertMermaidButton">Insert Mermaid</button>
+        <a id="saveMarkdownButton" href="#" download="input.txt">Save as Markdown</a>
+        <a id="saveButton" href="#" download="output.html">Save as HTML</a>
+    </div>
+
+    <script src="./js/main.js"></script>
+    <script>
+        document.querySelector('.toggleButton').addEventListener('click', function() {
+            var content = document.getElementById('descriptionContent');
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                this.textContent = "📝 機能説明(クリックして説明を閉じる)";
+            } else {
+                content.style.display = 'none';
+                this.textContent = "📝 機能説明(クリックして説明を表示)";
+            }
+        });
+    </script>
+</body>
+
+</html>
