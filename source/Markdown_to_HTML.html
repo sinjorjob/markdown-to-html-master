@@ -75,7 +75,7 @@ pie title 日本の年収別人口分布
                     以下のように表示されます。<br>
                     <img alt="./images/pre/pie_chart.png" src="./images/pre/pie_chart.png" style="max-width: 800px;" />
                 </li><br>
-                <li>🐍 <strong>コードブロック追加機能</strong><br>プログラムコード等をコードブロックとして表示します。<br>例えば、以下のように記述します：
+                <li>🐍 <strong>コードブロック追加機能</strong><br>[<b>Insert Code</b>]ボタンを押すと、コードブロックを追加するためのテンプレートが挿入されます。<br>挿入されたテンプレート内にコードを記述することで、コードブロックを作成できます。</li><br>例えば、以下のように記述します：
                     <pre>
 ```python
 #根拠となる文書の表示
@@ -115,12 +115,12 @@ captions = result['@search.captions']
 
     <div id="buttons">
         <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-        <!-- 新たに「プレビューを更新」ボタンを追加 -->
-        <button id="updatePreviewButton">Update Preview</button>
-        <button id="uploadImageButton">Insert Image</button>
-        <button id="insertMermaidButton">Insert Mermaid</button>
-        <a id="saveMarkdownButton" href="#" download="input.txt">Save as Markdown</a>
-        <a id="saveButton" href="#" download="output.html">Save as HTML</a>
+        <button id="updatePreviewButton" data-tooltip="プレビューを更新する">Update Preview</button>
+        <button id="uploadImageButton" data-tooltip="画像ファイルを挿入する">Insert Image</button>
+        <button id="insertCodeButton" data-tooltip="コードブロックを挿入する">Insert Code</button>
+        <button id="insertMermaidButton" data-tooltip="Mermaid形式の図を挿入する">Insert Mermaid</button>
+        <a id="saveMarkdownButton" href="#" download="input.txt" data-tooltip="Markdown情報をテキストに保存する">Save as Markdown</a>
+        <a id="saveButton" href="#" download="output.html" data-tooltip="プレビュー内容をhtmlファイルに出力する">Save as HTML</a>
     </div>
 
     <script src="./js/main.js"></script>
@@ -137,6 +137,7 @@ captions = result['@search.captions']
             }
         });
     </script>
+
 </body>
 
 </html>
