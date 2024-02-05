@@ -5,21 +5,62 @@ body {
     padding: 20px;
 }
 
+#title {
+    text-align: center;
+    font-size: 2.5em;
+    color: #FFFFFF;
+    /* 文字色を白色に */
+    background-color: rgba(161, 0, 255, 0.6);
+    /* 背景色を半透明の紫色に */
+    padding: 20px;
+    border-radius: 10px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.markdown-input,
+.preview-area {
+    width: 48%;
+    /* コンテナの幅を48%に設定して間隔を作る */
+    background-color: #ffffff;
+    padding: 10px;
+    /* パディングを10pxに調整 */
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.markdown-input h2,
+.preview-area h2 {
+    text-align: center;
+    color: #A100FF;
+}
+
+textarea#editor {
+    /* 以下省略 */
+    border: 2px solid #000000 !important;
+    /* 枠線を黒色にし、他のスタイルより優先度を高くする */
+}
+
+#preview h2 {
+    /* プレビュー画面の<h2>タグのスタイルを元に戻す */
+    color: inherit;
+    border: none;
+    text-align: left;
+    /* テキストを左寄せに */
+}
+
 #editor,
 #preview {
-    width: 70%;
+    width: 100%;
     height: 1000px;
-    /* ここを修正。適切な高さに設定してください。 */
     border: 2px solid white;
     border-radius: 10px;
     background-color: white;
     color: black;
     overflow-y: auto;
-    /* ここを修正。 */
     padding: 20px;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    margin: 10px;
+    margin: 10px 0;
 }
 
 #preview {
@@ -74,6 +115,7 @@ td {
     background-color: #42e3ff;
     /* ホバー時のボタンの背景色を濃い金色に変更 */
 }
+
 #saveMarkdownButton:hover {
     background-color: #42e3ff;
     /* ホバー時のボタンの背景色を濃い金色に変更 */
@@ -103,7 +145,7 @@ td {
     /* ホバー時のアニメーションを追加 */
 }
 
-#updatePreviewButton{
+#updatePreviewButton {
     display: block;
     width: 200px;
     height: 50px;
@@ -125,6 +167,7 @@ td {
     /* 文字の大きさを調整 */
     /* ホバー時のアニメーションを追加 */
 }
+
 #uploadImageButton:hover {
     background-color: #42e3ff;
 }
@@ -132,9 +175,11 @@ td {
 #insertMermaidButton:hover {
     background-color: #42e3ff;
 }
+
 #updatePreviewButton:hover {
     background-color: #42e3ff;
 }
+
 /* アラートのデザインを修正 */
 .admonition {
     border: 1px solid #fa1882;
@@ -189,7 +234,8 @@ code {
     padding: 2px 4px;
     border-radius: 4px;
     font-family: 'Inconsolata', monospace;
-    font-size: 1.0em;  /* フォントサイズを小さく */
+    font-size: 1.0em;
+    /* フォントサイズを小さく */
 }
 
 .mermaid {
@@ -224,10 +270,12 @@ code {
     line-height: 1.6;
     color: #333;
 }
+
 #description ul {
     list-style-type: square;
     padding-left: 20px;
 }
+
 #description pre {
     background-color: #404040;
     padding: 10px;
@@ -247,3 +295,70 @@ code {
     padding: 10px;
     margin-top: 20px;
 }
+
+#basicOperation {
+    background-color: #fafafa;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #333;
+}
+
+#basicOperation ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+#basicOperation pre {
+    background-color: #404040;
+    padding: 10px;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+#howToUse {
+    background-color: #fafafa;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #333;
+    position: relative;
+    /* 追加 */
+    min-height: 190px;
+    /* 追加: ステップの情報の高さに合わせて調整 */
+}
+
+.step img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    position: absolute;
+    transition: opacity 1s ease-in-out;
+}
+
+.step.show {
+    opacity: 1;
+}
+
+.step p {
+    background-color: #ffffcc;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    color: #0e0e30;
+}
+
+
+
+
+
