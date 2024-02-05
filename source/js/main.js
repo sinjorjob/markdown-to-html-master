@@ -157,6 +157,17 @@ document.getElementById('insertMermaidButton').addEventListener('click', functio
     updatePreview();
 });
 
+// "Insert Code"ボタンがクリックされたときにコードブロックのフォーマットを挿入する
+document.getElementById('insertCodeButton').addEventListener('click', function () {
+    var editor = document.getElementById('editor');
+    var cursorPosition = getCursorPosition(editor);
+    var markdown = editor.value;
+    markdown = markdown.slice(0, cursorPosition) + '\n```\nここにコードを記載する\n```\n' + markdown.slice(cursorPosition);
+    editor.value = markdown;
+    setCursorPosition(editor, cursorPosition);
+    updatePreview();
+});
+
 
 function updatePreview() {
     var editor = document.getElementById('editor');
