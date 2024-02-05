@@ -121,7 +121,7 @@ td {
     /* ホバー時のボタンの背景色を濃い金色に変更 */
 }
 
-#uploadImageButton,
+#uploadImageButton,#insertCodeButton,
 #insertMermaidButton {
     display: block;
     width: 200px;
@@ -172,10 +172,13 @@ td {
     background-color: #42e3ff;
 }
 
-#insertMermaidButton:hover {
+#insertCodeButton:hover {
     background-color: #42e3ff;
 }
 
+#insertMermaidButton:hover {
+    background-color: #42e3ff;
+}
 #updatePreviewButton:hover {
     background-color: #42e3ff;
 }
@@ -358,7 +361,25 @@ code {
     color: #0e0e30;
 }
 
+/* Tooltip styling */
+#buttons button[data-tooltip]:hover:after, #buttons a[data-tooltip]:hover:after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -30px; /* Adjust the vertical position */
+    left: 60%; /* Move the tooltip a bit to the right */
+    transform: translateX(-50%);
+    padding: 5px; /* Reduce vertical padding */
+    border-radius: 15px; /* Increase border radius */
+    background: #000033; /* Change background color to a dark blue */
+    color: #f2f2f2; /* Change text color to a softer white */
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 1; /* Adjust line height */
+    z-index: 99;
+}
 
-
-
+/* Add position: relative; to the button and link elements */
+#buttons button, #buttons a {
+    position: relative;
+}
 
