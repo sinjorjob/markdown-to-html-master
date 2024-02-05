@@ -371,5 +371,26 @@ document.getElementById('saveButton').addEventListener('click', function () {
 });
 
 
+window.addEventListener('DOMContentLoaded', (event) => {
+    const steps = document.querySelectorAll('.step');
+    let currentStep = 0;
 
+    function showStep() {
+        // 全てのステップを非表示にする
+        steps.forEach((step) => {
+            step.classList.remove('show');
+        });
 
+        // 現在のステップを表示する
+        steps[currentStep].classList.add('show');
+
+        // 次のステップに進む、もしくは最初のステップに戻る
+        currentStep = (currentStep + 1) % steps.length;
+    }
+
+    // 初回のステップ表示
+    showStep();
+
+    // 3秒ごとにステップを切り替える
+    setInterval(showStep, 5000);
+});
