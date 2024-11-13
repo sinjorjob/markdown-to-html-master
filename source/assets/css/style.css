@@ -27,6 +27,49 @@ body {
     border-radius: 10px;
     box-sizing: border-box;
 }
+.preview-area {
+    flex: 1; /* 残りのスペースを全て使用 */
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    min-width: 200px;
+}
+.resizer {
+    width: 10px;
+    background-color: #ddd;
+    cursor: col-resize;
+    transition: background-color 0.3s;
+    position: relative; /* position: relative を追加 */
+}
+
+
+.resizer:hover {
+    background-color: #A100FF;
+}
+
+.resizer::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 20px;
+    background-color: #666;
+    border-radius: 1px;
+    pointer-events: none; /* マウスイベントを通過させる */
+} */
+
+/* ドラッグ中のスタイル */
+.resizer.dragging {
+    background-color: #A100FF;
+}
+
+/* ドラッグ中のスタイル */
+.resizer.dragging {
+    background-color: #A100FF;
+}
 
 .markdown-input h2,
 .preview-area h2 {
@@ -69,7 +112,20 @@ textarea#editor {
 
 .container {
     display: flex;
-    justify-content: space-around;
+    position: relative;
+    width: 100%;
+    gap: 0;
+    margin: 20px 0;
+}
+
+/* 入力エリアとプレビューエリアの初期幅を設定 */
+.markdown-input {
+    min-width: 200px;
+    width: 48%; /* 初期値として48%を設定 */
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
 }
 
 /* テーブルのスタイルを追加 */
@@ -81,6 +137,12 @@ th,
 td {
     border: 1px solid black;
     padding: 5px;
+}
+
+/* タイトル列の背景色を#A100FFに、文字色を白に設定 */
+th {
+    background-color: #A100FF;
+    color: #FFFFFF; /* 白色 */
 }
 
 /* 保存ボタンのスタイルを追加 */
@@ -168,6 +230,29 @@ td {
     /* ホバー時のアニメーションを追加 */
 }
 
+#highlightButton {
+    display: block;
+    width: 200px;
+    height: 50px;
+    margin: 20px auto;
+    background-color: #FFD700;
+    /* ボタンの背景色を金色に変更 */
+    text-align: center;
+    border-radius: 10px;
+    color: #423d3d;
+    /* ボタンの文字色を白に変更 */
+    font-weight: bold;
+    line-height: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: white;
+    /* 枠線をなくす */
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    /* 文字の大きさを調整 */
+    /* ホバー時のアニメーションを追加 */
+}
+
 #uploadImageButton:hover {
     background-color: #42e3ff;
 }
@@ -182,7 +267,9 @@ td {
 #updatePreviewButton:hover {
     background-color: #42e3ff;
 }
-
+#highlightButton:hover {
+    background-color: #42e3ff;
+}
 /* アラートのデザインを修正 */
 .admonition {
     border: 1px solid #fa1882;
@@ -383,3 +470,7 @@ code {
     position: relative;
 }
 
+/* ハイライトされたテキストのスタイル */
+.highlight {
+    background-color: yellow;
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ブラウザだけで完結！Markdown Easy Editor</title>
+    <script src="./assets/js/marked.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/default.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/night-owl.min.css">
+    <script src="./assets/js/highlight.min.js"></script>
+    <script src="./assets/js/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    
+    <h1 id="title" style="text-align: center;">🖊️ ブラウザだけで完結！Markdown Easy Editor 🖊️</h1>
+
+    <div id="howToUse">
+        <h2>使い方</h2>
+        <div class="step">
+            <img src="https://via.placeholder.com/300x150/FF6347/FFFFFF?text=Step1&font=segoe+ui" alt="Step 1" style="height: 50px; border-radius: 10px; box-shadow: 5px 5px 15px rgba(0,0,0,0.3);">
+            <p>画面左側のテキストエリアにマークダウン形式で文章を記述します。</p>
+        </div>
+        <div class="step">
+            <img src="https://via.placeholder.com/300x150/32CD32/FFFFFF?text=Step2&font=segoe+ui" alt="Step 2" style="height: 50px; border-radius: 10px; box-shadow: 5px 5px 15px rgba(0,0,0,0.3);">
+            <p>[<b>Update Preview</b>]ボタンを押すと、画面右側にプレビューが表示されます。</p>
+        </div>
+        <div class="step">
+            <img src="https://via.placeholder.com/300x150/4169E1/FFFFFF?text=Step3&font=segoe+ui" alt="Step 3" style="height: 50px; border-radius: 10px; box-shadow: 5px 5px 15px rgba(0,0,0,0.3);">
+            <p>[<b>Save as HTML</b>]ボタンを押すと、現在のプレビューをHTMLファイルとして保存できます。</p>
+        </div>
+    </div>
+
+
+    <div id="description">
+        <h2 id="descriptionButton" class="toggleButton">📝 機能の詳細(クリックして説明を表示)</h2>
+        <div id="descriptionContent" style="display: none;">
+            <ul>
+                <div id="caution">
+                    <h3>🚨 注意事項</h3>
+                    <p>画面左側に入力した文章は<b>自動的にPC内のローカルストレージに保存される</b>ため、<b>次回エディタを開いた際は前回の状態が自動ロード</b>されます。<br>
+                        ただし、<b>別のPCへ転送したり種類が異なるブラウザで開いた場合はデータを引き継ぐことができません。</b><br>
+                        ⚠️[<b>Save as Markdown</b>]ボタンでテキストとして保存しておくことをお勧めします。</p>
+                </div><br>
+                <li>📄 <strong>プレビュー機能</strong><br>画面左側にマークダウン形式で文章を記載すると、画面右側にプレビュー表示します。<br>[<b>Update
+                        Preview</b>]ボタンを押すとプレビューが更新されます。</li><br>
+                <li>📚 <strong>目次の自動挿入機能</strong><br>「<b>#目次</b>」と記載することで<b>見出し(#タグ)</b>を自動的に判別して冒頭に目次を生成します。</li><br>
+                <li>🔔
+                    <strong>info機能</strong><br>「<b>#info</b>」と記載することで特筆したいインフォーメーションを視覚的に見やすいボックスで表示します。<br>例えば、以下のように記述します：
+                    <pre>#info
+セマンティック検索では大量の文章中のどの部分から一致したと判断したかをキャプションとして表示する機能がある。</pre>
+                    以下のように表示されます。<br>
+                    <img alt="./images/pre/info.png" src="./images/pre/info.png" style="max-width: 800px;" />
+                </li><br>
+                <li>⚠️ <strong>alert機能</strong><br>「<b>#alert</b>」と記載することで注意事項を視覚的に見やすいボックスで表示します。<br>例えば、以下のように記述します：
+                    <pre>#alert
+セマンティック検索を利用するにはAzure AI Searchの価格レベルを「Basic」以上にする必要がある。</pre>
+                    以下のように表示されます。<br>
+                    <img alt="./images/pre/alert.png" src="./images/pre/alert.png" style="max-width: 800px;" />
+                </li><br>
+
+                <li>🖊️ <strong>インラインコードの強調表示</strong><br>
+                    バッククォート（<code>`</code>）で文字列を囲むことで、インラインコードとして強調表示できます。<br>
+                    例：<code>`インラインコード`</code> のように記述すると、インラインコードとして表示されます。
+                </li>
+                <br>
+                <li>🌟 <strong>テキストのハイライト表示</strong><br>
+                    文字列を範囲選択して[<b>Highlight sentence</b>]ボタンを押すと、背景色が黄色で太文字にハイライトされます。<br>
+                    例：<span class="highlight"><strong>ハイライトしたい文字列</strong></span>
+                </li>
+                <br>
+                <li>📊 <strong>Mermaid作図機能</strong><br>図を描画したい場合はMermaid表記を使って、Mermaidコードから図を自動生成します。（[<b>Insert
+                        Mermaid</b>]ボタンから追加）<br>例えば、以下のように記述します：
+                    <pre>
+```mermaid
+pie title 日本の年収別人口分布
+    "200万円以下" : 20
+    "200万円～400万円" : 30
+    "400万円～600万円" : 25
+    "600万円～800万円" : 15
+    "800万円以上" : 10
+```           </pre>
+                    以下のように表示されます。<br>
+                    <img alt="./images/pre/pie_chart.png" src="./images/pre/pie_chart.png" style="max-width: 800px;" />
+                </li><br>
+                <li>🐍 <strong>コードブロック追加機能</strong><br>[<b>Insert Code</b>]ボタンを押すと、コードブロックを追加するためのテンプレートが挿入されます。<br>挿入されたテンプレート内にコードを記述することで、コードブロックを作成できます。</li><br>例えば、以下のように記述します：
+                    <pre>
+```python
+#根拠となる文書の表示
+captions = result['@search.captions']
+    if captions:
+    caption = captions[0]
+    print(f"Caption: {caption.text}\n")
+```</pre>
+                    以下のように表示されます。<br>
+                    右上の[<b>Copy</b>]ボタンを押すとコード全体をクリップボードにコピーできます。<br>
+                    <img alt="./images/pre/code.png" src="./images/pre/code.png" style="max-width: 800px;" />
+                </li><br>
+                <li>🖼️ <strong>画像追加機能</strong><br>※画像は予めimagesフォルダに画像ファイルを入れて置き、[Insert
+                    Image]ボタンから画像ファイルを選択することで追加可能です。</li><br>以下のようなimgタグが自動的に挿入されます。<br>
+                    <pre>＜img alt="./images/azure-open-ai-003.png" src="./images/azure-open-ai-003.png" style="max-width: 800px;"/＞</pre>
+                <li>💾 <strong>マークダウン情報の保存機能</strong><br>[<b>Save as Markdown</b>]ボタンを押すとテキストファイルとしてダウンロード可能です。</li><br>
+                <li>📤 <strong>htmlファイル出力機能</strong><br>[<b>Save as HTML</b>]ボタンを押すとプレビュー内容をhtmlファイルとして出力します。</li><br>
+                <div id="caution">
+                    <h3>🚨 制約事項</h3>
+                    <p>HTMLファイルを出力した後は、出力されたHTMLファイルとimagesフォルダを同じフォルダに入れておかないと画像が表示されません。</p>
+                </div>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="markdown-input">
+            <h2>Markdown入力欄</h2>
+            <textarea id="editor" placeholder="ここにMarkdown表記のコードをコピー＆ペーストする"></textarea>
+        </div>
+        <div class="resizer" id="dragMe"></div>
+        <div class="preview-area">
+            <h2>プレビュー画面</h2>
+            <div id="preview"></div>
+        </div>
+    </div>
+
+    <div id="buttons">
+        <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+        <button id="updatePreviewButton" data-tooltip="プレビューを更新する">Update Preview</button>
+        <button id="uploadImageButton" data-tooltip="画像ファイルを挿入する">Insert Image</button>
+        <button id="insertCodeButton" data-tooltip="コードブロックを挿入する">Insert Code</button>
+        <button id="insertMermaidButton" data-tooltip="Mermaid形式の図を挿入する">Insert Mermaid</button>
+        <a id="saveMarkdownButton" href="#" download="input.txt" data-tooltip="Markdown情報をテキストに保存する">Save as Markdown</a>
+        <a id="saveButton" href="#" download="output.html" data-tooltip="プレビュー内容をhtmlファイルに出力する">Save as HTML</a>
+        <button id="highlightButton" data-tooltip="選択した文章をハイライトする">Highlight sentence</button>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
+    <script>
+
+        document.getElementById('descriptionButton').addEventListener('click', function() {
+            var content = document.getElementById('descriptionContent');
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                this.textContent = "📝 機能説明(クリックして説明を閉じる)";
+            } else {
+                content.style.display = 'none';
+                this.textContent = "📝 機能説明(クリックして説明を表示)";
+            }
+        });
+    </script>
+
+</body>
+
+</html>

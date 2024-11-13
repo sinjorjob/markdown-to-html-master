@@ -10,7 +10,33 @@ function setCursorPosition(textarea, position) {
     textarea.focus();
 }
 
+//選択範囲の文字列をハイライト強調する
+document.getElementById('highlightButton').addEventListener('click', function() {
+    var editor = document.getElementById('editor');
+    var start = editor.selectionStart;
+    var end = editor.selectionEnd;
+    var selectedText = editor.value.substring(start, end);
+    
+    // 選択されたテキストがある場合のみ処理を行う
+    if (selectedText) {
+        var beforeText = editor.value.substring(0, start);
+        var afterText = editor.value.substring(end);
+        var highlightedText = '<span class="highlight"><strong>' + selectedText + '</strong></span>';
+        
+        // テキストエリアの内容を更新
+        editor.value = beforeText + highlightedText + afterText;
+        
+        // ハイライトされたテキストの後ろにカーソルを移動
+        var newCursorPos = beforeText.length + highlightedText.length;
+        editor.setSelectionRange(newCursorPos, newCursorPos);
+        
+        // プレビューを更新
+        updatePreview();
 
+        // ローカルストレージに保存
+        localStorage.setItem('markdown', editor.value);
+    }
+});
 
 
 // マークダウンのテキストを解析し、見出しを取得する関数
@@ -174,6 +200,7 @@ function updatePreview() {
     var preview = document.getElementById('preview');
     var markdown = editor.value;
 
+
     // 目次を生成する
     if (markdown.includes('#目次')) {
         var headings = getHeadings(markdown);
@@ -271,6 +298,10 @@ document.getElementById('saveButton').addEventListener('click', function () {
                 font-family: 'Roboto', sans-serif;
                 padding: 20px;
             }
+            /* ハイライトされたテキストのスタイル */
+            .highlight {
+                background-color: yellow;
+            }
             /* テーブルのスタイルを追加 */
             table {
                 border-collapse: collapse;
@@ -279,12 +310,21 @@ document.getElementById('saveButton').addEventListener('click', function () {
                 border: 1px solid black;
                 padding: 5px;
             }
+            th {
+                background-color: #A100FF;
+                color: #FFFFFF; /* 白色 */
+            }
             /* マークダウンの部分の背景色を白に設定 */
             .markdown {
                 background-color: white;
                 color: black;
                 padding: 20px;
                 border-radius: 10px;
+            }
+            /* highlight.jsによるコードブロックのスタイルをオーバーライド */
+            .hljs {
+                background-color: #011627 !important;
+                color: #d6deeb !important; /* コードの文字色も適宜調整する */
             }
             /* アラートのデザインを修正 */
             .admonition {
@@ -316,6 +356,7 @@ document.getElementById('saveButton').addEventListener('click', function () {
             .admonition.info .admonition-title {
                 color: #0000ff; /* タイトルの文字色を青色に */
             }
+
             code {
                 background-color: #4b4b4b;
                 color: #f0f0f0;
@@ -340,7 +381,7 @@ document.getElementById('saveButton').addEventListener('click', function () {
             
             .copy-button:hover {
                 opacity: 1;
-            
+
         </style>
     </head>
     <body>
@@ -408,4 +449,68 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     // 3秒ごとにステップを切り替える
     setInterval(showStep, 5000);
+});
+
+
+// リサイズ機能の実装
+document.addEventListener('DOMContentLoaded', function() {
+    const resizer = document.getElementById('dragMe');
+    const leftSide = resizer.previousElementSibling;
+    const rightSide = resizer.nextElementSibling;
+    
+    // 現在のマウス位置
+    let x = 0;
+    let leftWidth = 0;
+
+    // マウスダウンイベントのハンドラー
+    const mouseDownHandler = function(e) {
+        x = e.clientX;
+        leftWidth = leftSide.getBoundingClientRect().width;
+
+        // マウスムーブとマウスアップのイベントリスナーを追加
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
+        
+        // リサイザーにドラッグ中のスタイルを適用
+        resizer.classList.add('dragging');
+    };
+
+    // マウスムーブイベントのハンドラー
+    const mouseMoveHandler = function(e) {
+        // マウスの移動距離を計算
+        const dx = e.clientX - x;
+        
+        // コンテナの幅を取得
+        const containerWidth = resizer.parentNode.getBoundingClientRect().width;
+        
+        // 新しい幅を計算（パーセンテージ）
+        let newLeftWidth = ((leftWidth + dx) / containerWidth) * 100;
+        
+        // 最小幅と最大幅の制限
+        newLeftWidth = Math.min(Math.max(20, newLeftWidth), 80);
+        
+        // 左側の要素の幅を設定
+        leftSide.style.flex = `0 0 ${newLeftWidth}%`;
+        
+        // カーソルスタイルを設定
+        document.body.style.cursor = 'col-resize';
+        
+        // 選択を無効化（ドラッグ中のテキスト選択を防ぐ）
+        document.body.style.userSelect = 'none';
+    };
+
+    // マウスアップイベントのハンドラー
+    const mouseUpHandler = function() {
+        // イベントリスナーを削除
+        document.removeEventListener('mousemove', mouseMoveHandler);
+        document.removeEventListener('mouseup', mouseUpHandler);
+        
+        // スタイルをリセット
+        resizer.classList.remove('dragging');
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+    };
+
+    // リサイザーにマウスダウンイベントリスナーを追加
+    resizer.addEventListener('mousedown', mouseDownHandler);
 });
